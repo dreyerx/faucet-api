@@ -1,7 +1,9 @@
 import json
 from pymongo import MongoClient
 from config import MONGO_HOST, MONGO_PORT, MONGO_USER, MONGO_PASS
-from model import TransactionModel, asdict
+from model import TransactionModel
+
+from fastapi.encoders import jsonable_encoder
 
 class Database:
     def __init__(self) -> None:
@@ -17,7 +19,7 @@ class Database:
         return uri
     
     def save_transaction(self, transaction: TransactionModel):
-        transaction_data    = asdict(transaction)
+        transaction_data    = jsonable_encoder(transaction)
         inserted_data      = self.transaction.insert_one(transaction_data)
         return transaction_data
 

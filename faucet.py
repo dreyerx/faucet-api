@@ -29,7 +29,6 @@ def claim(target):
     tx_model     = TransactionModel(
         txhash=tx_data.get("transactionHash").hex(),
         block=str(tx_data.get("blockNumber")),
-        timestamp=datetime.now().isoformat(),
         to=tx_data.get("to"),
         value=provider.to_wei(VALUE, "ether")
     )

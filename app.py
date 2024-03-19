@@ -1,5 +1,6 @@
 from typing import Union
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from redis import Redis
 from config import TIME_LIMIT, REDIS_HOST, REDIS_PORT
 from model import RequestClaim
@@ -12,6 +13,13 @@ redis   = Redis(
 )
 app     = FastAPI()
 database    = Database()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"]
+)
 
 def checkClaimedAgain(address: str):
     ttl     = redis.ttl(f"faucet_{address}")
@@ -46,4 +54,8 @@ def claim(data: RequestClaim):
 
 @app.get("/transactions")
 def transactions(limit: int = 100):
-    return {"limit": limit}
+    transactions_data   = database.transactions(limit=limit)
+    return {
+        "status": "ok",
+        "data": list(transactions_data)
+    }
