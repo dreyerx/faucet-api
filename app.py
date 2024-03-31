@@ -14,11 +14,16 @@ redis   = Redis(
 app     = FastAPI()
 database    = Database()
 
+origins = [
+    "http://localhost:3000"
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["GET", "POST"],
-    allow_headers=["*"]
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 def checkClaimedAgain(address: str):
@@ -33,19 +38,25 @@ def setCantClaim(address: str):
 def claim(data: RequestClaim):
     timeClaimAgain  = checkClaimedAgain(data.address)
     if timeClaimAgain < 1:
-        tx_faucet     = ClaimFaucet(data.address)
-        database.save_transaction(tx_faucet)
-        setCantClaim(data.address)
-        return {
-            "status": "ok",
-            "data": {
-                "transaction_hash": tx_faucet.txhash,
-                "block": tx_faucet.block,
-                "timestamp": tx_faucet.timestamp,
-                "to": tx_faucet.to,
-                "value": tx_faucet.value
+        try:
+            tx_faucet     = ClaimFaucet(data.address)
+            database.save_transaction(tx_faucet)
+            setCantClaim(data.address)
+            return {
+                "status": "ok",
+                "data": {
+                    "transaction_hash": tx_faucet.txhash,
+                    "block": tx_faucet.block,
+                    "timestamp": tx_faucet.timestamp,
+                    "to": tx_faucet.to,
+                    "value": tx_faucet.value
+                }
             }
-        }
+        except Exception as e:
+            return {
+                "status": "fail",
+                "message": str(e)
+            }
     else:
         return {
             "status": "fail",

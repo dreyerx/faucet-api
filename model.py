@@ -12,4 +12,4 @@ class TransactionModel(BaseModel):
     block:         str       = Field(...)
     to:            str       = Field(...)
     value:         int       = Field(...)
-    timestamp:     datetime  = Field(default=datetime.now())
+    timestamp:     datetime  = Field(default_factory=datetime.now)

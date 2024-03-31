@@ -7,16 +7,20 @@ services:
       - 27017:27017
     volumes:
       - ./faucet-db:/data/db
-  
+      - /etc/localtime:/etc/localtime:ro
+      
   redis:
     image: redis:alpine
     ports:
       - 6379:6379
     volumes:
       - ./cache-db:/data
-  
+      - /etc/localtime:/etc/localtime:ro
+
   app:
     image: faucet-app
     build: .
     ports:
       - 8081:8081
+    volumes:
+      - /etc/localtime:/etc/localtime:ro

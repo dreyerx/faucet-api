@@ -7,10 +7,10 @@ WALLET      = [
 VALUE       = "1"
 EXPLORER    = ""
 
-REDIS_HOST  = "localhost"
+REDIS_HOST  = "host.docker.internal"
 REDIS_PORT  = 6379
 
-MONGO_HOST  = "localhost"
+MONGO_HOST  = "host.docker.internal"
 MONGO_PORT  = 27017
 MONGO_USER  = "faucet"
 MONGO_PASS  = "SuperSecretPasswordForDreyerXFaucet"

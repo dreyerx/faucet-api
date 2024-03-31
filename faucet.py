@@ -6,27 +6,31 @@ from web3.types import TxParams
 from eth_account.signers.local import LocalAccount
 from model import TransactionModel
 
-provider    = Web3(
+provider = Web3(
     HTTPProvider(
         RPC_URL
     )
 )
 
+
 def claim(target):
-    account: LocalAccount    = provider.eth.account.from_key(
+    if provider.is_address(target) is False:
+        raise Exception("Invalid ethereum address")
+    target_checksum = provider.to_checksum_address(target)
+    account: LocalAccount = provider.eth.account.from_key(
         random.choice(WALLET)
     )
     transaction: TxParams = {
         "from": account.address,
-        "to": target,
+        "to": target_checksum,
         "value": provider.to_wei(VALUE, "ether"),
         "nonce": provider.eth.get_transaction_count(account.address)
     }
-    tx_hash     = provider.eth.send_transaction(
+    tx_hash = provider.eth.send_transaction(
         transaction
     )
-    tx_data     = provider.eth.get_transaction_receipt(tx_hash)
-    tx_model     = TransactionModel(
+    tx_data = provider.eth.get_transaction_receipt(tx_hash)
+    tx_model = TransactionModel(
         txhash=tx_data.get("transactionHash").hex(),
         block=str(tx_data.get("blockNumber")),
         to=tx_data.get("to"),

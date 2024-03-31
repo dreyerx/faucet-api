@@ -24,4 +24,4 @@ class Database:
         return transaction_data
 
     def transactions(self, limit):
-        return self.transaction.find().sort("_id", -1).limit(limit=limit)
+        return self.transaction.find().sort("timestamp", -1).limit(limit=limit)
