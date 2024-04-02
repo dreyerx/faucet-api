@@ -15,6 +15,7 @@ app     = FastAPI()
 database    = Database()
 
 origins = [
+    "https://faucet.dreyerx.com",
     "http://localhost:3000"
 ]
 
