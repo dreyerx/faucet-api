@@ -1,10 +1,10 @@
-RPC_URL     = "http://172.25.0.1:7545"
+RPC_URL     = "https://testnet-rpc.dreyerx.com"
 WALLET      = [
-    "0xd0c5b6c0cfa1cbd106834c8881b84f00a241cb1a607e62e4b3538611d88211da",
+    "0xa246d344ad14d090d3fcacfc4b8cb1a5d71265a5ebb982870ae6d967f3ae5426",
     "0x24f3ea977daf51daa11247bb8b76adf5b9485dd4159cbbcfcff6d3f634ee233f"
 ]
 
-VALUE       = "1"
+VALUE       = "5"
 EXPLORER    = ""
 
 REDIS_HOST  = "host.docker.internal"
