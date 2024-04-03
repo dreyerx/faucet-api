@@ -18,7 +18,7 @@ origins = [
     "http://faucet.dreyerx.com",
     "https://faucet.dreyerx.com",
     "http://localhost",
-    "http://localhost:8080",
+    "http://localhost:3000",
 ]
 
 app.add_middleware(
