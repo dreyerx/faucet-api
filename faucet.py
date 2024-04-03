@@ -38,8 +38,7 @@ def claim(target):
     tx_hash = provider.eth.send_raw_transaction(tx.rawTransaction)
     tx_data = provider.eth.get_transaction(tx_hash)
     tx_model = TransactionModel(
-        txhash=str(tx_hash),
-        block=str(tx_data.get("blockNumber")),
+        txhash=tx_hash.hex(),
         to=tx_data.get("to"),
         value=provider.to_wei(VALUE, "ether")
     )

@@ -49,7 +49,6 @@ def claim(data: RequestClaim):
                 "status": "ok",
                 "data": {
                     "transaction_hash": tx_faucet.txhash,
-                    "block": tx_faucet.block,
                     "timestamp": tx_faucet.timestamp,
                     "to": tx_faucet.to,
                     "value": tx_faucet.value

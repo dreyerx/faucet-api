@@ -9,7 +9,6 @@ class RequestClaim(BaseModel):
 class TransactionModel(BaseModel):
     id:            UUID      = Field(default_factory=uuid.uuid4, alias="_id")
     txhash:        str       = Field(...)
-    block:         str       = Field(...)
     to:            str       = Field(...)
     value:         int       = Field(...)
     timestamp:     datetime  = Field(default_factory=datetime.now)
