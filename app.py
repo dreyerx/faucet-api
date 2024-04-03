@@ -15,8 +15,10 @@ app     = FastAPI()
 database    = Database()
 
 origins = [
+    "http://faucet.dreyerx.com",
     "https://faucet.dreyerx.com",
-    "http://localhost:3000"
+    "http://localhost",
+    "http://localhost:8080",
 ]
 
 app.add_middleware(
