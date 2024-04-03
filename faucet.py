@@ -23,6 +23,7 @@ def claim(target):
         WALLET
     )
     transaction: TxParams = {
+        "chainId": 23452,
         "from": account.address,
         "to": target_checksum,
         "value": provider.to_wei(VALUE, "ether"),
