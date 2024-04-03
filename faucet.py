@@ -20,7 +20,7 @@ def claim(target):
         raise Exception("Invalid ethereum address")
     target_checksum = provider.to_checksum_address(target)
     account: LocalAccount = provider.eth.account.from_key(
-        random.choice(WALLET)
+        WALLET
     )
     transaction: TxParams = {
         "from": account.address,
