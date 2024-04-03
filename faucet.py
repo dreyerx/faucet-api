@@ -28,9 +28,11 @@ def claim(target):
         "value": provider.to_wei(VALUE, "ether"),
         "nonce": provider.eth.get_transaction_count(account.address)
     }
-    tx_hash = provider.eth.send_transaction(
-        transaction
+    tx = provider.eth.account.sign_transaction(
+        transaction,
+        account.key
     )
+    tx_hash = provider.eth.send_raw_transaction(tx)
     tx_data = provider.eth.get_transaction_receipt(tx_hash)
     tx_model = TransactionModel(
         txhash=tx_data.get("transactionHash").hex(),
