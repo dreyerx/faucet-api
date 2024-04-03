@@ -1,5 +1,5 @@
 RPC_URL     = "https://testnet-rpc.dreyerx.com"
-WALLET      = "0xa246d344ad14d090d3fcacfc4b8cb1a5d71265a5ebb982870ae6d967f3ae5426"
+WALLET      = "0xfaeee3a0acece2f1a0babb9030c17cf37211a8ba05c143166431dd554fa4c7f2"
 
 VALUE       = "5"
 EXPLORER    = ""
