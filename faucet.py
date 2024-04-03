@@ -3,6 +3,7 @@ from datetime import datetime
 from config import RPC_URL, WALLET, VALUE
 from web3 import Web3, HTTPProvider
 from web3.types import TxParams
+from web3.middleware import geth_poa
 from eth_account.signers.local import LocalAccount
 from model import TransactionModel
 
@@ -12,6 +13,7 @@ provider = Web3(
     )
 )
 
+provider.middleware_onion.inject(geth_poa.geth_poa_middleware, layer=0)
 
 def claim(target):
     if provider.is_address(target) is False:
