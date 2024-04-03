@@ -36,7 +36,7 @@ def claim(target):
         account.key
     )
     tx_hash = provider.eth.send_raw_transaction(tx.rawTransaction)
-    tx_data = provider.eth.get_transaction_receipt(tx_hash)
+    tx_data = provider.eth.get_transaction(tx_hash)
     tx_model = TransactionModel(
         txhash=tx_data.get("transactionHash").hex(),
         block=str(tx_data.get("blockNumber")),
