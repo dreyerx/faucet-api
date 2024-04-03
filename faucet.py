@@ -26,7 +26,9 @@ def claim(target):
         "from": account.address,
         "to": target_checksum,
         "value": provider.to_wei(VALUE, "ether"),
-        "nonce": provider.eth.get_transaction_count(account.address)
+        "nonce": provider.eth.get_transaction_count(account.address),
+        "gas": 200000,
+        "gasPrice": provider.eth.gas_price
     }
     tx = provider.eth.account.sign_transaction(
         transaction,
