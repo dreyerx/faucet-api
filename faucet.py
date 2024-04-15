@@ -43,3 +43,11 @@ def claim(target):
         value=provider.to_wei(VALUE, "ether")
     )
     return tx_model
+
+def check_sender_balance():
+    account: LocalAccount = provider.eth.account.from_key(
+        WALLET
+    )
+    account_balance = provider.eth.get_balance(account.address)
+    account_balance_ether = provider.from_wei(account_balance, "ether")
+    return account_balance_ether
